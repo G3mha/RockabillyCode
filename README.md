@@ -23,9 +23,9 @@ The only characters allowed are from a to Z, as capital sensitive.
 ```EBNF
 BLOCK = { STATEMENT };
 
-STATEMENT = ( | IDENTIFIER | PRINT | WHILE | IF ), "\n";
+STATEMENT = ( | DECLARATION | PRINT | WHILE | IF ), "\n";
 
-IDENTIFIER = ("unchained"|"chained"), IDENTIFIER, ["melody", BOOL_EXP];
+DECLARATION = IDENTIFIER, "is", BOOL_EXP;
 
 PRINT = "To say the words he truly feels:", BOOL_EXP;
 

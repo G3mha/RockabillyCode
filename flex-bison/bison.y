@@ -8,50 +8,40 @@ int yylex(void);
 extern int yylineno;
 %}
 
-%union {
-    int val; // For numbers
-    char* str; // For strings
-}
-
-%token <str> IDENTIFIER
-%token <val> NUMBER
-%token UNCHAINED CHAINED PRINT WHILE WHILE_END TALK IF LET_DREAM IF_END BUT NOW NEVER OR BLACK_JACK POKER AND TREAT_ME_LIKE EQUAL MORE LESS TREAT_NICE LOVE_TENDER DONT_MESS ALWAYS_ON_MIND SO_LONELY CANT_HELP IM_EVIL DEVIL_DISGUISE DONT_BELIEVE
-%token NEWLINE
-
-%type <str> identifier bool_exp bool_term rel_exp expression term factor
-%type <str> optional_else statements statement print while if chaining
+%token <int> NUMBER IDENTIFIER VARIABLE CONSTANT PRINT WHILE_CONDITION WHILE_STATEMENTS WHILE_END IF_CONDITION IF_STATEMENTS ELSE IF_END OR_INIT OR OR_END AND_INIT AND AND_END COMP_INIT COMP_EQUAL COMP_MORE COMP_LESS COMP_END SUM SUBTRACT MULTIPLY DIVIDE PLUS MINUS NOT INPUT NEWLINE
+%type <int> number sequence
 
 %%
+
 program: block
        ;
 
-block: '{' statements '}'
+block: statements
      ;
 
 statements: /* empty */
-          { $$ = strdup(""); }
-          | statements statement
+          | statement statements
           ;
 
-statement: identifier NEWLINE
-         | print NEWLINE
+statement: print NEWLINE
+         | identifier NEWLINE
          | while NEWLINE
          | if NEWLINE
          ;
+
+print: PRINT bool_exp
+     { $$ = $2; }
+     ;
 
 identifier: chaining IDENTIFIER
           { $$ = strdup($2); }
           ;
 
-chaining: UNCHAINED
+chaining: VARIABLE
         { $$ = strdup("unchained"); }
-        | CHAINED
+        | CONSTANT
         { $$ = strdup("chained"); }
         ;
-
-print: PRINT bool_exp
-     { $$ = $2; }
-     ;
 
 while: WHILE bool_exp TALK NEWLINE statements WHILE_END
      { $$ = $2; }
@@ -111,13 +101,11 @@ term_op: ALWAYS_ON_MIND
        ;
 
 factor: NUMBER
-      { $$ = strdup(""); } // Convert number to string if needed or handle differently
       | IDENTIFIER
       { $$ = $1; }
       | factor_op factor
       { $$ = $2; }
       | DONT_BELIEVE
-      { $$ = strdup(""); }
       ;
 
 factor_op: CANT_HELP
@@ -125,7 +113,17 @@ factor_op: CANT_HELP
          | DEVIL_DISGUISE
          ;
 
+number:
+    NUMBER
+    ;
+
+sequence:
+    number
+    | sequence number { $$ = $1 * 10 + $2; }
+    ;
+
 %%
+
 void yyerror(const char *s) {
     fprintf(stderr, "%s at line %d\n", s, yylineno);
 }

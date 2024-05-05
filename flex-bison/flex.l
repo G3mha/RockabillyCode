@@ -6,8 +6,7 @@
 
 %%
 
-"unchained" { return VARIABLE; }
-"chained" { return CONSTANT; }
+"is" { return DECLARATION; }
 
 "To say the words he truly feels:" { return PRINT; }
 
@@ -46,8 +45,17 @@
 
 "When you don't believe a word I say:" { return INPUT; }
 
+"one"   { yylval.val = 1; return NUMBER; }
+"two"   { yylval.val = 2; return NUMBER; }
+"three" { yylval.val = 3; return NUMBER; }
+"four"  { yylval.val = 4; return NUMBER; }
+"five"  { yylval.val = 5; return NUMBER; }
+"six"   { yylval.val = 6; return NUMBER; }
+"seven" { yylval.val = 7; return NUMBER; }
+"eight" { yylval.val = 8; return NUMBER; }
+"nine"  { yylval.val = 9; return NUMBER; }
+"zero"  { yylval.val = 0; return NUMBER; }
 [a-zA-Z]+ { yylval.str = strdup(yytext); return IDENTIFIER; }
-[0-9]+ { yylval.val = atoi(yytext); return NUMBER; }
 \n { return NEWLINE; }
 [ \t]+ { /* ignore whitespace */ }
 . { return *yytext; }
