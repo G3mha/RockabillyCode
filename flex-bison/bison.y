@@ -14,8 +14,8 @@ extern int yylineno;
 }
 
 %token <int_val> NUMBER
-%type <int_val> sequence
 %token <str_val> IDENTIFIER DECLARATOR PRINT WHILE_CONDITION WHILE_STATEMENTS WHILE_END IF_CONDITION IF_STATEMENTS ELSE IF_END OR_INIT OR OR_END AND_INIT AND AND_END COMP_INIT COMP_EQUAL COMP_MORE COMP_LESS COMP_END SUM SUBTRACT MULTIPLY DIVIDE PLUS MINUS NOT INPUT NEWLINE
+%type <int_val> expression bool_exp bool_term term factor sequence
 
 
 %%
@@ -32,6 +32,7 @@ statement: print NEWLINE
          ;
 
 print: PRINT bool_exp
+     { printf("Print result: %d\n", $2); }
      ;
 
 declaration: IDENTIFIER DECLARATOR bool_exp
@@ -47,16 +48,16 @@ optional_else: /* empty */
              | ELSE NEWLINE block
              ;
 
-bool_exp: OR_INIT bool_term OR_END
-        | bool_exp OR bool_term
+bool_exp: bool_term
+        | OR_INIT bool_exp OR bool_exp OR_END { printf("Or\n"); }
         ;
 
-bool_term: AND_INIT rel_exp AND_END
-         | bool_term AND rel_exp
+bool_term: rel_exp
+         | AND_INIT bool_term AND bool_term AND_END { printf("And\n"); }
          ;
 
-rel_exp: COMP_INIT expression
-       | rel_exp rel_op expression
+rel_exp: expression
+       | COMP_INIT rel_exp rel_op rel_exp COMP_END
        ;
 
 rel_op: COMP_EQUAL { printf("EQUAL\n"); }
@@ -65,7 +66,7 @@ rel_op: COMP_EQUAL { printf("EQUAL\n"); }
       ;
 
 expression: term
-          | expression expr_op term
+          | expression expr_op expression
           ;
 
 expr_op: SUM { printf("SUM\n"); }
@@ -73,7 +74,7 @@ expr_op: SUM { printf("SUM\n"); }
        ;
 
 term: factor
-    | term term_op factor
+    | term term_op term
     ;
 
 term_op: MULTIPLY { printf("MULTIPLY\n"); }
@@ -81,10 +82,10 @@ term_op: MULTIPLY { printf("MULTIPLY\n"); }
        ;
 
 factor: sequence
-       | IDENTIFIER { printf("IDENTIFIER\n"); }
-       | factor_op factor
-       | INPUT { printf("INPUT\n"); }
-       ;
+      | IDENTIFIER { printf("IDENTIFIER\n"); }
+      | factor_op factor
+      | INPUT { printf("INPUT\n"); }
+      ;
 
 factor_op: PLUS { printf("PLUS\n"); }
          | MINUS { printf("MINUS\n"); }
@@ -102,5 +103,10 @@ void yyerror(const char *s) {
 }
 
 int main(void) {
-    return yyparse();
+    if (yyparse() == 0) {
+       printf("Análise concluída com sucesso.\n");
+    } else {
+       printf("Análise falhou.\n");
+    }
+    return 0;
 }
