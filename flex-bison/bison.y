@@ -17,7 +17,6 @@ extern int yylineno;
 %token <str_val> IDENTIFIER DECLARATOR PRINT WHILE_CONDITION WHILE_STATEMENTS WHILE_END IF_CONDITION IF_STATEMENTS ELSE IF_END OR_INIT OR OR_END AND_INIT AND AND_END COMP_INIT COMP_EQUAL COMP_MORE COMP_LESS COMP_END SUM SUBTRACT MULTIPLY DIVIDE PLUS MINUS NOT INPUT NEWLINE
 %type <int_val> expression bool_exp bool_term term factor sequence
 
-
 %%
 
 block: /* empty */
@@ -93,7 +92,9 @@ factor_op: PLUS { printf("PLUS\n"); }
          ;
 
 sequence: NUMBER
+        { $$ = $1; }  // Assigns the value of NUMBER to sequence
         | sequence NUMBER
+        { $$ = $1 * 10 + $2; }  // Multiplies the current sequence by 10 and adds the new digit
         ;
 
 %%
@@ -104,9 +105,9 @@ void yyerror(const char *s) {
 
 int main(void) {
     if (yyparse() == 0) {
-       printf("Análise concluída com sucesso.\n");
+       printf("Analysis concluded sucessfully.\n");
     } else {
-       printf("Análise falhou.\n");
+       printf("Analysis failed.\n");
     }
     return 0;
 }

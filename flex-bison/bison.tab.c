@@ -485,10 +485,10 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    23,    23,    24,    25,    28,    29,    30,    31,    34,
-      38,    41,    44,    47,    48,    51,    52,    55,    56,    59,
-      60,    63,    64,    65,    68,    69,    72,    73,    76,    77,
-      80,    81,    84,    85,    86,    87,    90,    91,    92,    95,
+       0,    22,    22,    23,    24,    27,    28,    29,    30,    33,
+      37,    40,    43,    46,    47,    50,    51,    54,    55,    58,
+      59,    62,    63,    64,    67,    68,    71,    72,    75,    76,
+      79,    80,    83,    84,    85,    86,    89,    90,    91,    94,
       96
 };
 #endif
@@ -1445,83 +1445,93 @@ yyreduce:
   switch (yyn)
     {
         case 9:
-#line 35 "bison.y"
+#line 34 "bison.y"
     { printf("Print result: %d\n", (yyvsp[(2) - (2)].int_val)); ;}
     break;
 
   case 16:
-#line 52 "bison.y"
+#line 51 "bison.y"
     { printf("Or\n"); ;}
     break;
 
   case 18:
-#line 56 "bison.y"
+#line 55 "bison.y"
     { printf("And\n"); ;}
     break;
 
   case 21:
-#line 63 "bison.y"
+#line 62 "bison.y"
     { printf("EQUAL\n"); ;}
     break;
 
   case 22:
-#line 64 "bison.y"
+#line 63 "bison.y"
     { printf("MORE\n"); ;}
     break;
 
   case 23:
-#line 65 "bison.y"
+#line 64 "bison.y"
     { printf("LESS\n"); ;}
     break;
 
   case 26:
-#line 72 "bison.y"
+#line 71 "bison.y"
     { printf("SUM\n"); ;}
     break;
 
   case 27:
-#line 73 "bison.y"
+#line 72 "bison.y"
     { printf("SUBTRACT\n"); ;}
     break;
 
   case 30:
-#line 80 "bison.y"
+#line 79 "bison.y"
     { printf("MULTIPLY\n"); ;}
     break;
 
   case 31:
-#line 81 "bison.y"
+#line 80 "bison.y"
     { printf("DIVIDE\n"); ;}
     break;
 
   case 33:
-#line 85 "bison.y"
+#line 84 "bison.y"
     { printf("IDENTIFIER\n"); ;}
     break;
 
   case 35:
-#line 87 "bison.y"
+#line 86 "bison.y"
     { printf("INPUT\n"); ;}
     break;
 
   case 36:
-#line 90 "bison.y"
+#line 89 "bison.y"
     { printf("PLUS\n"); ;}
     break;
 
   case 37:
-#line 91 "bison.y"
+#line 90 "bison.y"
     { printf("MINUS\n"); ;}
     break;
 
   case 38:
-#line 92 "bison.y"
+#line 91 "bison.y"
     { printf("NOT\n"); ;}
+    break;
+
+  case 39:
+#line 95 "bison.y"
+    { (yyval.int_val) = (yyvsp[(1) - (1)].int_val); ;}
+    break;
+
+  case 40:
+#line 97 "bison.y"
+    { (yyval.int_val) = (yyvsp[(1) - (2)].int_val) * 10 + (yyvsp[(2) - (2)].int_val); ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1525 "bison.tab.c"
+#line 1535 "bison.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1735,7 +1745,7 @@ yyreturn:
 }
 
 
-#line 99 "bison.y"
+#line 100 "bison.y"
 
 
 void yyerror(const char *s) {
@@ -1744,9 +1754,9 @@ void yyerror(const char *s) {
 
 int main(void) {
     if (yyparse() == 0) {
-       printf("Análise concluída com sucesso.\n");
+       printf("Analysis concluded sucessfully.\n");
     } else {
-       printf("Análise falhou.\n");
+       printf("Analysis failed.\n");
     }
     return 0;
 }
