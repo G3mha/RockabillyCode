@@ -24,7 +24,8 @@ block: /* empty */
        | block statement
        ;
 
-statement: print NEWLINE
+statement: NEWLINE
+         | print NEWLINE
          | declaration NEWLINE
          | while NEWLINE
          | if NEWLINE
@@ -35,6 +36,7 @@ print: PRINT bool_exp
      ;
 
 declaration: IDENTIFIER DECLARATOR bool_exp
+           { printf("Declaring Identifier: %s\n", $1); }
            ;
 
 while: WHILE_CONDITION bool_exp WHILE_STATEMENTS NEWLINE block WHILE_END
