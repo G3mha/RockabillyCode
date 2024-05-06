@@ -971,7 +971,7 @@ case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
 #line 9 "flex.l"
-{ return NEWLINE; }
+{ ++yylineno; return NEWLINE; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP

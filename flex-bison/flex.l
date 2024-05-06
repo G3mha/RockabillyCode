@@ -6,7 +6,7 @@
 
 %%
 
-"\n" { return NEWLINE; }
+"\n" { ++yylineno; return NEWLINE; }
 [ \t]+ { /* ignore whitespace */ }
 
 "one"   { yylval.int_val = 1; return NUMBER; }
