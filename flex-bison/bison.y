@@ -39,10 +39,10 @@ declaration: IDENTIFIER DECLARATOR bool_exp
            { printf("Declaring Identifier: %s\n", $1); }
            ;
 
-while: WHILE_CONDITION bool_exp WHILE_STATEMENTS NEWLINE block WHILE_END
+while: WHILE_CONDITION NEWLINE bool_exp NEWLINE WHILE_STATEMENTS NEWLINE block WHILE_END
      ;
 
-if: IF_CONDITION bool_exp IF_STATEMENTS NEWLINE block optional_else IF_END
+if: IF_CONDITION NEWLINE bool_exp NEWLINE IF_STATEMENTS NEWLINE block optional_else IF_END
   ;
 
 optional_else: /* empty */
@@ -50,47 +50,47 @@ optional_else: /* empty */
              ;
 
 bool_exp: bool_term
-        | OR_INIT bool_exp OR bool_exp OR_END { printf("Or\n"); }
+        | bool_exp OR bool_exp
         ;
 
 bool_term: rel_exp
-         | AND_INIT bool_term AND bool_term AND_END { printf("And\n"); }
+         | bool_term AND bool_term
          ;
 
 rel_exp: expression
-       | COMP_INIT rel_exp rel_op {printf("12\n");} rel_exp {printf("44\n");} COMP_END
+       | rel_exp rel_op rel_exp
        ;
 
-rel_op: COMP_EQUAL { printf("EQUAL\n"); }
-      | COMP_MORE { printf("MORE\n"); }
-      | COMP_LESS { printf("LESS\n"); }
+rel_op: COMP_EQUAL { printf("Equal\n"); }
+      | COMP_MORE { printf("More\n"); }
+      | COMP_LESS { printf("Less\n"); }
       ;
 
 expression: term
           | expression expr_op expression
           ;
 
-expr_op: SUM { printf("SUM\n"); }
-       | SUBTRACT { printf("SUBTRACT\n"); }
+expr_op: SUM { printf("Sum\n"); }
+       | SUBTRACT { printf("Subtract\n"); }
        ;
 
 term: factor
     | term term_op term
     ;
 
-term_op: MULTIPLY { printf("MULTIPLY\n"); }
-       | DIVIDE { printf("DIVIDE\n"); }
+term_op: MULTIPLY { printf("Multiply\n"); }
+       | DIVIDE { printf("Divide\n"); }
        ;
 
 factor: sequence
-      | IDENTIFIER { printf("IDENTIFIER\n"); }
+      | IDENTIFIER { printf("Identifier\n"); }
       | factor_op factor
-      | INPUT { printf("INPUT\n"); }
+      | INPUT { printf("Input\n"); }
       ;
 
-factor_op: PLUS { printf("PLUS\n"); }
-         | MINUS { printf("MINUS\n"); }
-         | NOT { printf("NOT\n"); }
+factor_op: PLUS { printf("Plus\n"); }
+         | MINUS { printf("Minus\n"); }
+         | NOT { printf("Not\n"); }
          ;
 
 sequence: NUMBER
