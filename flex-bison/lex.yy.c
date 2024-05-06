@@ -355,8 +355,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 43
-#define YY_END_OF_BUFFER 44
+#define YY_NUM_RULES 42
+#define YY_END_OF_BUFFER 43
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -366,53 +366,53 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[426] =
     {   0,
-        0,    0,   44,   42,   41,   40,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
-       39,   41,   39,   39,    0,   39,   39,   39,   39,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,   39,
-       39,   39,   39,    1,   39,   39,   39,   39,   11,   39,
-       39,   39,   39,   39,   39,   39,   39,   39,   39,    0,
-        0,    0,   39,   39,    0,    0,   39,    0,   39,   39,
-       39,   39,   14,    8,   39,   39,   39,   39,   39,   39,
-       39,   39,   29,   39,   39,   34,    0,   39,   39,   30,
+       41,   41,   43,   42,    2,    1,   41,   41,   41,   41,
+       41,   41,   41,   41,   41,   41,   41,   41,   41,   41,
+       41,   41,   41,   41,   41,   41,   41,   41,   41,   41,
+       41,    2,   41,   41,    0,   41,   41,   41,   41,   41,
+       41,   41,   41,   41,   41,   41,   41,   41,   41,   41,
+       41,   41,   41,   13,   41,   41,   41,   41,   23,   41,
+       41,   41,   41,   41,   41,   41,   41,   41,   41,    0,
+        0,    0,   41,   41,    0,    0,   41,    0,   41,   41,
+       41,   41,   26,   20,   41,   41,   41,   41,   41,   41,
+       41,   41,    3,   41,   41,    8,    0,   41,   41,    4,
 
-       39,   39,    0,    0,    0,    0,   39,   39,    0,    0,
-       39,    0,   39,   39,   39,    0,    0,   39,   39,   39,
-       33,   32,   19,   18,   37,   39,   39,    0,   39,   39,
-       39,   38,    0,    0,    0,    0,    0,   12,    0,    0,
-        0,    0,   39,    0,   39,    0,    0,    0,   36,   17,
-       15,   35,    0,   31,   39,   39,    0,    0,    0,    0,
+       41,   41,    0,    0,    0,    0,   41,   41,    0,    0,
+       41,    0,   41,   41,   41,    0,    0,   41,   41,   41,
+        7,    6,   31,   30,   11,   41,   41,    0,   41,   41,
+       41,   12,    0,    0,    0,    0,    0,   24,    0,    0,
+        0,    0,   41,    0,   41,    0,    0,    0,   10,   29,
+       27,    9,    0,    5,   41,   41,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,   26,    0,   10,    0,    0,    0,    0,
-
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    9,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,   16,    0,
-        0,    0,    0,    0,    0,   20,    0,    0,    6,   21,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,   38,    0,   22,    0,    0,    0,    0,
 
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    5,    0,    0,    0,   24,    0,
-        0,    4,    3,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,   21,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,   13,
-        0,    0,    0,    0,    0,    7,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    0,    0,   25,    0,    0,    0,   23,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,   28,    0,
+        0,    0,    0,    0,    0,   32,    0,    0,   18,   33,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
 
-        0,    0,    0,    0,    0,    0,    0,   27,    0,    0,
-        0,    0,    0,    0,    0,    0,    0,   22,    2,    0,
-        0,    0,    0,   28,    0
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,   17,    0,    0,    0,   36,    0,
+        0,   16,   15,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,   25,
+        0,    0,    0,    0,    0,   19,    0,    0,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+        0,    0,    0,    0,   37,    0,    0,    0,   35,    0,
+
+        0,    0,    0,    0,    0,    0,    0,   39,    0,    0,
+        0,    0,    0,    0,    0,    0,    0,   34,   14,    0,
+        0,    0,    0,   40,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -688,7 +688,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "flex.l"
 #line 2 "flex.l"
-#include "main.tab.h"
+#include "bison.tab.h"
 #line 692 "lex.yy.c"
 #line 693 "lex.yy.c"
 
@@ -968,222 +968,219 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
+/* rule 1 can match eol */
 YY_RULE_SETUP
 #line 9 "flex.l"
-{ return DECLARATION; }
+{ return NEWLINE; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "flex.l"
-{ return PRINT; }
+#line 10 "flex.l"
+{ /* ignore whitespace */ }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 13 "flex.l"
-{ return WHILE_CONDITION; }
+#line 12 "flex.l"
+{ yylval.int_val = 1; return NUMBER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 14 "flex.l"
-{ return WHILE_STATEMENTS; }
+#line 13 "flex.l"
+{ yylval.int_val = 2; return NUMBER; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 15 "flex.l"
-{ return WHILE_END; }
+#line 14 "flex.l"
+{ yylval.int_val = 3; return NUMBER; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 17 "flex.l"
-{ return IF_CONDITION; }
+#line 15 "flex.l"
+{ yylval.int_val = 4; return NUMBER; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 18 "flex.l"
-{ return IF_STATEMENTS; }
+#line 16 "flex.l"
+{ yylval.int_val = 5; return NUMBER; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 19 "flex.l"
-{ return ELSE; }
+#line 17 "flex.l"
+{ yylval.int_val = 6; return NUMBER; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 20 "flex.l"
-{ return IF_END; }
+#line 18 "flex.l"
+{ yylval.int_val = 7; return NUMBER; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 22 "flex.l"
-{ return OR_INIT; }
+#line 19 "flex.l"
+{ yylval.int_val = 8; return NUMBER; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 23 "flex.l"
-{ return OR; }
+#line 20 "flex.l"
+{ yylval.int_val = 9; return NUMBER; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 24 "flex.l"
-{ return OR_END; }
+#line 21 "flex.l"
+{ yylval.int_val = 0; return NUMBER; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 26 "flex.l"
-{ return AND_INIT; }
+#line 23 "flex.l"
+{ return DECLARATOR; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 27 "flex.l"
-{ return AND; }
+#line 24 "flex.l"
+{ return PRINT; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 28 "flex.l"
-{ return AND_END; }
+#line 25 "flex.l"
+{ return WHILE_CONDITION; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 30 "flex.l"
-{ return COMP_INIT; }
+#line 26 "flex.l"
+{ return WHILE_STATEMENTS; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 31 "flex.l"
-{ return COMP_EQUAL; }
+#line 27 "flex.l"
+{ return WHILE_END; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 32 "flex.l"
-{ return COMP_MORE; }
+#line 28 "flex.l"
+{ return IF_CONDITION; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 33 "flex.l"
-{ return COMP_LESS; }
+#line 29 "flex.l"
+{ return IF_STATEMENTS; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 34 "flex.l"
-{ return COMP_END; }
+#line 30 "flex.l"
+{ return ELSE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 36 "flex.l"
-{ return SUM; }
+#line 31 "flex.l"
+{ return IF_END; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 37 "flex.l"
-{ return SUBTRACT; }
+#line 32 "flex.l"
+{ return OR_INIT; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 39 "flex.l"
-{ return MULTIPLY; }
+#line 33 "flex.l"
+{ return OR; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 40 "flex.l"
-{ return DIVIDE; }
+#line 34 "flex.l"
+{ return OR_END; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 42 "flex.l"
-{ return PLUS; }
+#line 36 "flex.l"
+{ return AND_INIT; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 43 "flex.l"
-{ return MINUS; }
+#line 37 "flex.l"
+{ return AND; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 44 "flex.l"
-{ return NOT; }
+#line 38 "flex.l"
+{ return AND_END; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 46 "flex.l"
-{ return INPUT; }
+#line 40 "flex.l"
+{ return COMP_INIT; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 48 "flex.l"
-{ yylval.val = 1; return NUMBER; }
+#line 41 "flex.l"
+{ return COMP_EQUAL; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 49 "flex.l"
-{ yylval.val = 2; return NUMBER; }
+#line 42 "flex.l"
+{ return COMP_MORE; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 50 "flex.l"
-{ yylval.val = 3; return NUMBER; }
+#line 43 "flex.l"
+{ return COMP_LESS; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 51 "flex.l"
-{ yylval.val = 4; return NUMBER; }
+#line 44 "flex.l"
+{ return COMP_END; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 52 "flex.l"
-{ yylval.val = 5; return NUMBER; }
+#line 46 "flex.l"
+{ return SUM; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 53 "flex.l"
-{ yylval.val = 6; return NUMBER; }
+#line 47 "flex.l"
+{ return SUBTRACT; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 54 "flex.l"
-{ yylval.val = 7; return NUMBER; }
+#line 49 "flex.l"
+{ return MULTIPLY; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 55 "flex.l"
-{ yylval.val = 8; return NUMBER; }
+#line 50 "flex.l"
+{ return DIVIDE; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 56 "flex.l"
-{ yylval.val = 9; return NUMBER; }
+#line 52 "flex.l"
+{ return PLUS; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 57 "flex.l"
-{ yylval.val = 0; return NUMBER; }
+#line 53 "flex.l"
+{ return MINUS; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 58 "flex.l"
-{ yylval.str = strdup(yytext); return IDENTIFIER; }
+#line 54 "flex.l"
+{ return NOT; }
 	YY_BREAK
 case 40:
-/* rule 40 can match eol */
 YY_RULE_SETUP
-#line 59 "flex.l"
-{ return NEWLINE; }
+#line 56 "flex.l"
+{ return INPUT; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 60 "flex.l"
-{ /* ignore whitespace */ }
+#line 58 "flex.l"
+{
+  yylval.str_val = strdup(yytext); return IDENTIFIER; 
+}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 61 "flex.l"
-{ return *yytext; }
-	YY_BREAK
-case 43:
-YY_RULE_SETUP
-#line 63 "flex.l"
+#line 62 "flex.l"
 ECHO;
 	YY_BREAK
-#line 1186 "lex.yy.c"
+#line 1183 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2188,6 +2185,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 63 "flex.l"
+#line 62 "flex.l"
 
 

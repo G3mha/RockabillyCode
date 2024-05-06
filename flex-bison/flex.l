@@ -1,24 +1,34 @@
 %{
-#include "main.tab.h"
+#include "bison.tab.h"
 %}
 
 %option noyywrap
 
 %%
 
-"is" { return DECLARATION; }
+"\n" { return NEWLINE; }
+[ \t]+ { /* ignore whitespace */ }
 
+"one"   { yylval.int_val = 1; return NUMBER; }
+"two"   { yylval.int_val = 2; return NUMBER; }
+"three" { yylval.int_val = 3; return NUMBER; }
+"four"  { yylval.int_val = 4; return NUMBER; }
+"five"  { yylval.int_val = 5; return NUMBER; }
+"six"   { yylval.int_val = 6; return NUMBER; }
+"seven" { yylval.int_val = 7; return NUMBER; }
+"eight" { yylval.int_val = 8; return NUMBER; }
+"nine"  { yylval.int_val = 9; return NUMBER; }
+"zero"  { yylval.int_val = 0; return NUMBER; }
+
+"is" { return DECLARATOR; }
 "To say the words he truly feels:" { return PRINT; }
-
 "While I can think" { return WHILE_CONDITION; }
 "While I can stand" { return WHILE_STATEMENTS; }
 "while I can talk" { return WHILE_END; }
-
 "If I can dream" { return IF_CONDITION; }
 "so please let my dream" { return IF_STATEMENTS; }
 "but" { return ELSE; }
 "come true" { return IF_END; }
-
 "It's Now" { return OR_INIT; }
 "or" { return OR; }
 "Never" { return OR_END; }
@@ -44,20 +54,9 @@
 "You're the devil in disguise" { return NOT; }
 
 "When you don't believe a word I say:" { return INPUT; }
-
-"one"   { yylval.val = 1; return NUMBER; }
-"two"   { yylval.val = 2; return NUMBER; }
-"three" { yylval.val = 3; return NUMBER; }
-"four"  { yylval.val = 4; return NUMBER; }
-"five"  { yylval.val = 5; return NUMBER; }
-"six"   { yylval.val = 6; return NUMBER; }
-"seven" { yylval.val = 7; return NUMBER; }
-"eight" { yylval.val = 8; return NUMBER; }
-"nine"  { yylval.val = 9; return NUMBER; }
-"zero"  { yylval.val = 0; return NUMBER; }
-[a-zA-Z]+ { yylval.str = strdup(yytext); return IDENTIFIER; }
-\n { return NEWLINE; }
-[ \t]+ { /* ignore whitespace */ }
-. { return *yytext; }
+  
+[a-zA-Z]* {
+  yylval.str_val = strdup(yytext); return IDENTIFIER; 
+}
 
 %%

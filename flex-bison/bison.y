@@ -8,119 +8,92 @@ int yylex(void);
 extern int yylineno;
 %}
 
-%token <int> NUMBER IDENTIFIER VARIABLE CONSTANT PRINT WHILE_CONDITION WHILE_STATEMENTS WHILE_END IF_CONDITION IF_STATEMENTS ELSE IF_END OR_INIT OR OR_END AND_INIT AND AND_END COMP_INIT COMP_EQUAL COMP_MORE COMP_LESS COMP_END SUM SUBTRACT MULTIPLY DIVIDE PLUS MINUS NOT INPUT NEWLINE
-%type <int> number sequence
+%union {
+    int int_val;
+    char *str_val;
+}
+
+%token <int_val> NUMBER
+%type <int_val> sequence
+%token <str_val> IDENTIFIER DECLARATOR PRINT WHILE_CONDITION WHILE_STATEMENTS WHILE_END IF_CONDITION IF_STATEMENTS ELSE IF_END OR_INIT OR OR_END AND_INIT AND AND_END COMP_INIT COMP_EQUAL COMP_MORE COMP_LESS COMP_END SUM SUBTRACT MULTIPLY DIVIDE PLUS MINUS NOT INPUT NEWLINE
+
 
 %%
 
-program: block
+block: /* empty */
+       | statement
+       | block statement
        ;
 
-block: statements
-     ;
-
-statements: /* empty */
-          | statement statements
-          ;
-
 statement: print NEWLINE
-         | identifier NEWLINE
+         | declaration NEWLINE
          | while NEWLINE
          | if NEWLINE
          ;
 
 print: PRINT bool_exp
-     { $$ = $2; }
      ;
 
-identifier: chaining IDENTIFIER
-          { $$ = strdup($2); }
-          ;
+declaration: IDENTIFIER DECLARATOR bool_exp
+           ;
 
-chaining: VARIABLE
-        { $$ = strdup("unchained"); }
-        | CONSTANT
-        { $$ = strdup("chained"); }
-        ;
-
-while: WHILE bool_exp TALK NEWLINE statements WHILE_END
-     { $$ = $2; }
+while: WHILE_CONDITION bool_exp WHILE_STATEMENTS NEWLINE block WHILE_END
      ;
 
-if: IF bool_exp LET_DREAM NEWLINE statements optional_else IF_END
-  { $$ = $2; }
+if: IF_CONDITION bool_exp IF_STATEMENTS NEWLINE block optional_else IF_END
   ;
 
 optional_else: /* empty */
-             { $$ = strdup(""); }
-             | BUT NEWLINE statements
-             { $$ = $3; }
+             | ELSE NEWLINE block
              ;
 
-bool_exp: NOW bool_term NEVER
-        { $$ = $2; }
+bool_exp: OR_INIT bool_term OR_END
         | bool_exp OR bool_term
-        { $$ = $1; }
         ;
 
-bool_term: BLACK_JACK rel_exp POKER
-         { $$ = $2; }
+bool_term: AND_INIT rel_exp AND_END
          | bool_term AND rel_exp
-         { $$ = $1; }
          ;
 
-rel_exp: TREAT_ME_LIKE expression
-       { $$ = $2; }
+rel_exp: COMP_INIT expression
        | rel_exp rel_op expression
-       { $$ = $1; }
        ;
 
-rel_op: EQUAL
-      | MORE
-      | LESS
+rel_op: COMP_EQUAL { printf("EQUAL\n"); }
+      | COMP_MORE { printf("MORE\n"); }
+      | COMP_LESS { printf("LESS\n"); }
       ;
 
 expression: term
-          { $$ = $1; }
           | expression expr_op term
-          { $$ = $1; }
           ;
 
-expr_op: LOVE_TENDER
-       | DONT_MESS
+expr_op: SUM { printf("SUM\n"); }
+       | SUBTRACT { printf("SUBTRACT\n"); }
        ;
 
 term: factor
-    { $$ = $1; }
     | term term_op factor
-    { $$ = $1; }
     ;
 
-term_op: ALWAYS_ON_MIND
-       | SO_LONELY
+term_op: MULTIPLY { printf("MULTIPLY\n"); }
+       | DIVIDE { printf("DIVIDE\n"); }
        ;
 
-factor: NUMBER
-      | IDENTIFIER
-      { $$ = $1; }
-      | factor_op factor
-      { $$ = $2; }
-      | DONT_BELIEVE
-      ;
+factor: sequence
+       | IDENTIFIER { printf("IDENTIFIER\n"); }
+       | factor_op factor
+       | INPUT { printf("INPUT\n"); }
+       ;
 
-factor_op: CANT_HELP
-         | IM_EVIL
-         | DEVIL_DISGUISE
+factor_op: PLUS { printf("PLUS\n"); }
+         | MINUS { printf("MINUS\n"); }
+         | NOT { printf("NOT\n"); }
          ;
 
-number:
-    NUMBER
-    ;
-
-sequence:
-    number
-    | sequence number { $$ = $1 * 10 + $2; }
-    ;
+sequence: NUMBER
+        | sequence NUMBER
+        ;
 
 %%
 

@@ -39,86 +39,84 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     IDENTIFIER = 258,
-     NUMBER = 259,
-     UNCHAINED = 260,
-     CHAINED = 261,
-     PRINT = 262,
-     WHILE = 263,
+     NUMBER = 258,
+     IDENTIFIER = 259,
+     DECLARATOR = 260,
+     PRINT = 261,
+     WHILE_CONDITION = 262,
+     WHILE_STATEMENTS = 263,
      WHILE_END = 264,
-     TALK = 265,
-     IF = 266,
-     LET_DREAM = 267,
+     IF_CONDITION = 265,
+     IF_STATEMENTS = 266,
+     ELSE = 267,
      IF_END = 268,
-     BUT = 269,
-     NOW = 270,
-     NEVER = 271,
-     OR = 272,
-     BLACK_JACK = 273,
-     POKER = 274,
-     AND = 275,
-     TREAT_ME_LIKE = 276,
-     EQUAL = 277,
-     MORE = 278,
-     LESS = 279,
-     TREAT_NICE = 280,
-     LOVE_TENDER = 281,
-     DONT_MESS = 282,
-     ALWAYS_ON_MIND = 283,
-     SO_LONELY = 284,
-     CANT_HELP = 285,
-     IM_EVIL = 286,
-     DEVIL_DISGUISE = 287,
-     DONT_BELIEVE = 288,
-     NEWLINE = 289
+     OR_INIT = 269,
+     OR = 270,
+     OR_END = 271,
+     AND_INIT = 272,
+     AND = 273,
+     AND_END = 274,
+     COMP_INIT = 275,
+     COMP_EQUAL = 276,
+     COMP_MORE = 277,
+     COMP_LESS = 278,
+     COMP_END = 279,
+     SUM = 280,
+     SUBTRACT = 281,
+     MULTIPLY = 282,
+     DIVIDE = 283,
+     PLUS = 284,
+     MINUS = 285,
+     NOT = 286,
+     INPUT = 287,
+     NEWLINE = 288
    };
 #endif
 /* Tokens.  */
-#define IDENTIFIER 258
-#define NUMBER 259
-#define UNCHAINED 260
-#define CHAINED 261
-#define PRINT 262
-#define WHILE 263
+#define NUMBER 258
+#define IDENTIFIER 259
+#define DECLARATOR 260
+#define PRINT 261
+#define WHILE_CONDITION 262
+#define WHILE_STATEMENTS 263
 #define WHILE_END 264
-#define TALK 265
-#define IF 266
-#define LET_DREAM 267
+#define IF_CONDITION 265
+#define IF_STATEMENTS 266
+#define ELSE 267
 #define IF_END 268
-#define BUT 269
-#define NOW 270
-#define NEVER 271
-#define OR 272
-#define BLACK_JACK 273
-#define POKER 274
-#define AND 275
-#define TREAT_ME_LIKE 276
-#define EQUAL 277
-#define MORE 278
-#define LESS 279
-#define TREAT_NICE 280
-#define LOVE_TENDER 281
-#define DONT_MESS 282
-#define ALWAYS_ON_MIND 283
-#define SO_LONELY 284
-#define CANT_HELP 285
-#define IM_EVIL 286
-#define DEVIL_DISGUISE 287
-#define DONT_BELIEVE 288
-#define NEWLINE 289
+#define OR_INIT 269
+#define OR 270
+#define OR_END 271
+#define AND_INIT 272
+#define AND 273
+#define AND_END 274
+#define COMP_INIT 275
+#define COMP_EQUAL 276
+#define COMP_MORE 277
+#define COMP_LESS 278
+#define COMP_END 279
+#define SUM 280
+#define SUBTRACT 281
+#define MULTIPLY 282
+#define DIVIDE 283
+#define PLUS 284
+#define MINUS 285
+#define NOT 286
+#define INPUT 287
+#define NEWLINE 288
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 11 "main.y"
+#line 11 "bison.y"
 {
-    int val; // For numbers
-    char* str; // For strings
+    int int_val;
+    char *str_val;
 }
 /* Line 1529 of yacc.c.  */
-#line 122 "main.tab.h"
+#line 120 "bison.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
