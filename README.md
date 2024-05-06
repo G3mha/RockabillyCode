@@ -20,6 +20,8 @@ Numbers aren't much of a concern in songs, so if you wish to use them, write the
 
 The only characters allowed are from a to Z, as capital sensitive.
 
+## EBNF
+
 ```EBNF
 BLOCK = { STATEMENT };
 
@@ -53,3 +55,7 @@ LETTER = ( "a" | "..." | "z" | "A" | "..." | "Z" ) ;
 
 DIGIT = ( "one" | "two" | "three" | "four" | "five" | "six" | "seven" | "eight" | "nine" | "zero" ) ;
 ```
+
+## Railroad Diagram
+
+![Railroad Diagram](./docs/railroad_diagram.png)

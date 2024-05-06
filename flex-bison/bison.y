@@ -58,7 +58,7 @@ bool_term: rel_exp
          ;
 
 rel_exp: expression
-       | COMP_INIT rel_exp rel_op rel_exp COMP_END
+       | COMP_INIT rel_exp rel_op {printf("12\n");} rel_exp {printf("44\n");} COMP_END
        ;
 
 rel_op: COMP_EQUAL { printf("EQUAL\n"); }
