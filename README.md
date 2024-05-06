@@ -29,15 +29,15 @@ DECLARATION = IDENTIFIER, "is", BOOL_EXP;
 
 PRINT = "To say the words he truly feels:", BOOL_EXP;
 
-WHILE = "While I can think", BOOL_EXP, "while I can talk", "\n", {STATEMENT}, "While I can stand";
+WHILE = "While I can think", "\n", BOOL_EXP, "\n", "While I can talk", "\n", {STATEMENT}, "While I can stand";
 
-IF = "If I can dream", BOOL_EXP , "so please let my dream", "\n", {STATEMENT}, (|"but", "\n", {STATEMENT}), "come true";
+IF = "If I can dream","\n", BOOL_EXP, "\n", "so please let my dream", "\n", {STATEMENT}, (|"but", "\n", {STATEMENT}), "come true";
 
-BOOL_EXP = "It's Now", BOOL_TERM, { ("or"), BOOL_TERM }, "Never";
+BOOL_EXP = BOOL_TERM, { ("It's Now or Never"), BOOL_TERM };
 
-BOOL_TERM = "Oh, there's black Jack", REL_EXP, { ("and"), REL_EXP }, "poker";
+BOOL_TERM = REL_EXP, { ("Oh, there's black Jack and poker"), REL_EXP };
 
-REL_EXP = "Treat me like", EXPRESSION, { ("equal" | "more" | "less"), EXPRESSION }, "treat me nice";
+REL_EXP = EXPRESSION, { "Treat me like", ("equal" | "more" | "less"), "treat me nice", EXPRESSION };
 
 EXPRESSION = TERM, { ("Love me tender" | "So don't you mess around with me"), TERM } ;
 
