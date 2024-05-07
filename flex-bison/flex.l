@@ -23,23 +23,17 @@
 "is" { return DECLARATOR; }
 "To say the words he truly feels:" { return PRINT; }
 "While I can think" { return WHILE_CONDITION; }
-"While I can stand" { return WHILE_STATEMENTS; }
-"while I can talk" { return WHILE_END; }
+"while I can talk" { return WHILE_STATEMENTS; }
+"While I can stand" { return WHILE_END; }
 "If I can dream" { return IF_CONDITION; }
-"so please let my dream" { return IF_STATEMENTS; }
-"but" { return ELSE; }
-"come true" { return IF_END; }
-"It's Now" { return OR_INIT; }
-"or" { return OR; }
-"Never" { return OR_END; }
-"Oh, there's black Jack" { return AND_INIT; }
-"and" { return AND; }
-"poker" { return AND_END; }
-"Treat me like" { return COMP_INIT; }
-"equal to" { return COMP_EQUAL; }
-"more than" { return COMP_MORE; }
-"less than" { return COMP_LESS; }
-"treat me nice" { return COMP_END; }
+"So please let my dream" { return IF_STATEMENTS; }
+"But" { return ELSE; }
+"Come true" { return IF_END; }
+"It's Now or Never" { return OR; }
+"Oh, there's black Jack and poker" { return AND; }
+"Treat me like equal to" { return COMP_EQUAL; }
+"Treat me like more than" { return COMP_MORE; }
+"Treat me like less than" { return COMP_LESS; }
 "Love me tender" { return SUM; }
 "So don't you mess around with me" { return SUBTRACT; }
 "You were always on my mind" { return MULTIPLY; }

@@ -20,9 +20,9 @@ extern int yylineno;
 %%
 
 block: /* empty */
-       | statement
-       | block statement
-       ;
+     | statement
+     | block statement
+     ;
 
 statement: NEWLINE
          | print NEWLINE

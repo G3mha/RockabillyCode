@@ -33,13 +33,13 @@ PRINT = "To say the words he truly feels:", BOOL_EXP;
 
 WHILE = "While I can think", "\n", BOOL_EXP, "\n", "While I can talk", "\n", {STATEMENT}, "While I can stand";
 
-IF = "If I can dream","\n", BOOL_EXP, "\n", "so please let my dream", "\n", {STATEMENT}, (|"but", "\n", {STATEMENT}), "come true";
+IF = "If I can dream","\n", BOOL_EXP, "\n", "So please let my dream", "\n", {STATEMENT}, (|"But", "\n", {STATEMENT}), "Come true";
 
 BOOL_EXP = BOOL_TERM, { ("It's Now or Never"), BOOL_TERM };
 
 BOOL_TERM = REL_EXP, { ("Oh, there's black Jack and poker"), REL_EXP };
 
-REL_EXP = EXPRESSION, { "Treat me like", ("equal" | "more" | "less"), "treat me nice", EXPRESSION };
+REL_EXP = EXPRESSION, { "Treat me like", ("equal" | "more" | "less"), EXPRESSION };
 
 EXPRESSION = TERM, { ("Love me tender" | "So don't you mess around with me"), TERM } ;
 
