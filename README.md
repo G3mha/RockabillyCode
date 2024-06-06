@@ -1,5 +1,7 @@
 # RockabillyCode
 
+Author: Enricco Gemha
+
 ## Description
 
 RockabillyCode is a dynamic and expressive programming language designed to capture the vibrant energy and timeless charm of Elvis Presley's music. It features a syntax that's easy on the eyes, much like the smooth lines of a classic Cadillac, and it's built to encourage developers to be as creative and innovative as Elvis was on stage.
@@ -58,4 +60,4 @@ DIGIT = ( "one" | "two" | "three" | "four" | "five" | "six" | "seven" | "eight" 
 
 ## Railroad Diagram
 
-![Railroad Diagram](./docs/railroad_diagram.png)
+![Railroad Diagram](./docs/img/railroad_diagram.png)
