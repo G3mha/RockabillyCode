@@ -2,6 +2,20 @@
 
 Author: Enricco Gemha
 
+## How to compile its code?
+
+You can verify the lexical and sintatic adherence, with Flex and Bison, respectively.
+
+```bash
+
+```
+
+In order to compile and run the code, you can use the compiler written in Swift, with the following command.
+
+```bash
+swift main.swift <filename>.ep
+```
+
 ## Description
 
 RockabillyCode is a dynamic and expressive programming language designed to capture the vibrant energy and timeless charm of Elvis Presley's music. It features a syntax that's easy on the eyes, much like the smooth lines of a classic Cadillac, and it's built to encourage developers to be as creative and innovative as Elvis was on stage.
