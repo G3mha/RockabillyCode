@@ -2,7 +2,7 @@
 
 Author: Enricco Gemha
 
-## How to compile its code?
+## How to compile the code?
 
 You can verify the lexical and sintatic adherence, with Flex and Bison, respectively.
 

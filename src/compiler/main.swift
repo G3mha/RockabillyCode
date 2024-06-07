@@ -423,6 +423,18 @@ class Tokenizer {
   var source: String
   var position: Int
   var next: Token
+  var wordToDigit: [String: String] = [
+    "one": "1",
+    "two": "2",
+    "three": "3",
+    "four": "4",
+    "five": "5",
+    "six": "6",
+    "seven": "7",
+    "eight": "8",
+    "nine": "9",
+    "zero": "0"
+  ]
 
   init(source: String) {
     self.source = source
@@ -430,99 +442,137 @@ class Tokenizer {
     self.next = Token(type: "", value: "0")
   }
 
-  func selectNext() -> Void {
-    if position < source.count {
-      var char = source[source.index(source.startIndex, offsetBy: position)]
-      var tokenWord = ""
-      while char == " " && position < source.count {
-        position += 1
-        char = source[source.index(source.startIndex, offsetBy: position)]
-      }
-      if char == "," {
-        self.next = Token(type: "COMMA", value: "0")
-      } else if char == "+" {
-        self.next = Token(type: "PLUS", value: "0")
-      } else if char == "-" {
-        self.next = Token(type: "MINUS", value: "0")
-      } else if char == "*" {
-        self.next = Token(type: "MUL", value: "0")
-      } else if char == "/" {
-        self.next = Token(type: "DIV", value: "0")
-      } else if char == "(" {
-        self.next = Token(type: "LPAREN", value: "0")
-      } else if char == ")" {
-        self.next = Token(type: "RPAREN", value: "0")
-      } else if char == ">" {
-        self.next = Token(type: "GT", value: "0")
-      } else if char == "<" {
-        self.next = Token(type: "LT", value: "0")
-      } else if char == "=" {
-        if source[source.index(source.startIndex, offsetBy: position+1)] == "=" {
-          self.next = Token(type: "EQ", value: "0")
-          position += 1
-        } else {
-          self.next = Token(type: "ASSIGN", value: "0")
-        }
-      } else if char == "." {
-        if source[source.index(source.startIndex, offsetBy: position+1)] == "." {
-          self.next = Token(type: "CONCAT", value: "0")
-          position += 1
-        } else {
-          writeStderrAndExit("Invalid character \(tokenWord)")
-        }
-      } else if char == "\n" {
-        self.next = Token(type: "EOL", value: "0")
-      } else if char == "\"" {
-        position += 1
-        while position < source.count {
-          let nextChar = source[source.index(source.startIndex, offsetBy: position)]
-          if nextChar == "\"" {
-            break
-          } else if nextChar == "\n"{
-            writeStderrAndExit("Forgot to close string with \"")
-          } else {
-            tokenWord += String(nextChar)
-          }
-          position += 1
-        }
-        if source[source.index(source.startIndex, offsetBy: position)] != "\"" {
-          writeStderrAndExit("Forgot to close string with \"")
-        }
-        self.next = Token(type: "STRING", value: tokenWord)
-      } else if char.isNumber {
-        while position < source.count {
-          let nextChar = source[source.index(source.startIndex, offsetBy: position)]
-          if nextChar.isNumber {
-            tokenWord += String(nextChar)
-          } else {
-            break
-          }
-          position += 1
-        }
-        position -= 1
-        self.next = Token(type: "NUMBER", value: tokenWord)
-      } else if char.isLetter {
-        while position < source.count {
-          let nextChar = source[source.index(source.startIndex, offsetBy: position)]
-          if nextChar.isLetter || nextChar.isNumber || nextChar == "_" {
-            tokenWord += String(nextChar)
-          } else {
-            break
-          }
-          position += 1
-        }
-        position -= 1
-        if ["print", "if", "else", "while", "do", "then", "end", "and", "or", "not", "read", "local", "function", "return"].contains(tokenWord) {
-          self.next = Token(type: tokenWord.uppercased(), value: "0")
-        } else {
-          self.next = Token(type: "IDENTIFIER", value: tokenWord)
-        }
-      } else {
-        writeStderrAndExit("Invalid character \(tokenWord)")
-      }
+  func selectNext() {
+    while position < source.count && source[source.index(source.startIndex, offsetBy: position)].isWhitespace {
       position += 1
-    } else {
+    }
+    guard position < source.count else {
       self.next = Token(type: "EOF", value: "0")
+      return
+    }
+
+    let currentChar = source[source.index(source.startIndex, offsetBy: position)]
+
+    if currentChar.isLetter {
+      var word = ""
+      while position < source.count && source[source.index(source.startIndex, offsetBy: position)].isLetter {
+        word.append(source[source.index(source.startIndex, offsetBy: position)])
+        position += 1
+      }
+      switch word {
+      case "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "zero":
+        // Read the number
+        var number = ""
+        var currentWord = word
+        while wordToDigit.keys.contains(currentWord) {
+          number.append(wordToDigit[currentWord]!)
+          currentWord = ""
+          // Skip whitespace
+          while position < source.count && source[source.index(source.startIndex, offsetBy: position)].isWhitespace {
+            position += 1
+          }
+          // Read the next word
+          while position < source.count && source[source.index(source.startIndex, offsetBy: position)].isLetter {
+            currentWord.append(source[source.index(source.startIndex, offsetBy: position)])
+            position += 1
+          }
+        }
+        self.next = Token(type: "NUMBER", value: number)
+      case "equal":
+        self.next = Token(type: "REL_OP", value: "equal")
+      case "more":
+        self.next = Token(type: "REL_OP", value: "more")
+      case "less":
+        self.next = Token(type: "REL_OP", value: "less")
+      case "is":
+        self.next = Token(type: "IS", value: "is")
+      case "To":
+        // consume the rest of the expression: "To say the words he truly feels: "
+        while position < source.count && source[source.index(source.startIndex, offsetBy: position)] != ":" {
+          position += 1
+        }
+        self.next = Token(type: "PRINT", value: "0")
+      case "While":
+        self.next = Token(type: "WHILE", value: "While")
+      case "If":
+        self.next = Token(type: "IF", value: "If")
+      case "But":
+        self.next = Token(type: "ELSE", value: "But")
+        return
+      default:
+        self.next = Token(type: "IDENTIFIER", value: word)
+      }
+    position += 1
+    } else {
+      let remainingChars = source.suffix(from: source.index(source.startIndex, offsetBy: position))
+
+      if remainingChars.hasPrefix("It's Now or Never") {
+        self.next = Token(type: "OR", value: "0")
+        position += "It's Now or Never".count
+        return
+      } else if remainingChars.hasPrefix("Oh, there's black Jack and poker") {
+        self.next = Token(type: "AND", value: "0")
+        position += "Oh, there's black Jack and poker".count
+        return
+      } else if remainingChars.hasPrefix("Love me tender") {
+        self.next = Token(type: "MUL", value: "0")
+        position += "Love me tender".count
+        return
+      } else if remainingChars.hasPrefix("So don't you mess around with me") {
+        self.next = Token(type: "DIV", value: "0")
+        position += "So don't you mess around with me".count
+        return
+      } else if remainingChars.hasPrefix("You were always on my mind") {
+        self.next = Token(type: "PLUS", value: "0")
+        position += "You were always on my mind".count
+        return
+      } else if remainingChars.hasPrefix("They're so lonely") {
+        self.next = Token(type: "MINUS", value: "0")
+        position += "They're so lonely".count
+        return
+      } else if remainingChars.hasPrefix("Can't Help Falling in Love") {
+        self.next = Token(type: "PLUS", value: "0")
+        position += "Can't Help Falling in Love".count
+        return
+      } else if remainingChars.hasPrefix("I'm evil") {
+        self.next = Token(type: "MINUS", value: "0")
+        position += "I'm evil".count
+        return
+      } else if remainingChars.hasPrefix("You're the devil in disguise") {
+        self.next = Token(type: "NOT", value: "0")
+        position += "You're the devil in disguise".count
+        return
+      } else if remainingChars.hasPrefix("When you don't believe a word I say:") {
+        self.next = Token(type: "READ", value: "0")
+        position += "When you don't believe a word I say:".count
+        return
+      } else {
+        switch currentChar {
+        case "(":
+          self.next = Token(type: "LPAREN", value: String(currentChar))
+        case ")":
+          self.next = Token(type: "RPAREN", value: String(currentChar))
+        case "{":
+          self.next = Token(type: "LBRACE", value: String(currentChar))
+        case "}":
+          self.next = Token(type: "RBRACE", value: String(currentChar))
+        case ",":
+          self.next = Token(type: "COMMA", value: String(currentChar))
+        case "\n":
+          self.next = Token(type: "EOL", value: String(currentChar))
+        case "\"":
+          position += 1
+          var string = ""
+          while source[source.index(source.startIndex, offsetBy: position)] != "\"" {
+            string.append(source[source.index(source.startIndex, offsetBy: position)])
+            position += 1
+          }
+          self.next = Token(type: "STRING", value: string)
+        default:
+          writeStderrAndExit("Unexpected character: \(currentChar)")
+        }
+        position += 1
+      }
     }
   }
 }
@@ -672,15 +722,7 @@ class Parser {
       }
     } else if tokenizer.next.type == "PRINT" {
       tokenizer.selectNext()
-      if tokenizer.next.type != "LPAREN" {
-        writeStderrAndExit("Missing opening parenthesis for print statement")
-      }
-      tokenizer.selectNext()
       let expression = parseBoolExpression(symbolTable: symbolTable, funcTable: funcTable)
-      if tokenizer.next.type != "RPAREN" {
-        writeStderrAndExit("Missing closing parenthesis for print statement")
-      }
-      tokenizer.selectNext()
       return PrintOp(value: "PRINT", children: [expression])
     } else if tokenizer.next.type == "WHILE" {
       tokenizer.selectNext()
@@ -836,8 +878,12 @@ func readFile(_ path: String) -> String {
 func main() {
   // Ensure there is at least one command line argument for the file path.
   guard CommandLine.arguments.count > 1 else {
-    writeStderrAndExit("Please provide a .lua file path.")
+    writeStderrAndExit("Please provide a file path.")
     return
+  }
+  // check if file has .ep extension
+  if !CommandLine.arguments[1].hasSuffix(".ep") {
+    writeStderrAndExit("File must have .ep extension")
   }
 
   let fileContent = readFile(CommandLine.arguments[1])
