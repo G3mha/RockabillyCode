@@ -25,21 +25,23 @@ RockabillyCode is a dynamic and expressive programming language designed to capt
 
 ## File format
 
-RockabillyCode programs are UTF-8 files with the .ep file extension.
+RockabillyCode programs are UTF-8 files with the `.ep` file extension.
 
 ## Comments handling
 
-Although it's not recommended to add comments to the lyrics of your song, if you really need it, always put them into parenthesis.
+While comments are generally discouraged in the lyrical style of RockabillyCode, if you must include them, always start them with `--`.
 
 ## Numbers
 
-Numbers aren't much of a concern in songs, so if you wish to use them, write them out in full.
+In keeping with the lyrical nature of RockabillyCode, numbers should be written out in full words (e.g., "one", "two", "three").
 
 ## Variable naming
 
-The only characters allowed are from a to Z, as capital sensitive.
+Variable names are case-sensitive and can only contain letters from a to Z.
 
 ## EBNF
+
+The following Extended Backus-Naur Form (EBNF) defines the grammar of RockabillyCode:
 
 ```EBNF
 BLOCK = { STATEMENT };
