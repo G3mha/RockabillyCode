@@ -1683,7 +1683,12 @@ void yyerror(const char *s) {
     fprintf(stderr, "Error: %s\n", s);
 }
 
-int main(void) {
-    return yyparse();
+int main() {
+    if (yyparse() == 0) {
+        printf("File parsed successfully.\n");
+    } else {
+        printf("Error parsing file.\n");
+    }
+    return 0;
 }
 
