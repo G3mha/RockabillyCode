@@ -534,7 +534,19 @@ class Tokenizer {
         self.next = Token(type: "NUMBER", value: wordNumber)
         return
       } else {
-        if remainingChars.hasPrefix("While I can think") {
+        if remainingChars.hasPrefix("Memphis") {
+          self.next = Token(type: "LOCAL", value: "0")
+          position += "Memphis".count
+        } else if remainingChars.hasPrefix("Blue Hawaii") {
+          self.next = Token(type: "FUNCTION", value: "0")
+          position += "Blue Hawaii".count
+        } else if remainingChars.hasPrefix("We can't go on together") {
+          self.next = Token(type: "END", value: "0")
+          position += "We can't go on together".count
+        } else if remainingChars.hasPrefix("Return to sender") {
+          self.next = Token(type: "RETURN", value: "0")
+          position += "Return to sender".count
+        } else if remainingChars.hasPrefix("While I can think") {
           self.next = Token(type: "WHILE", value: "0")
           position += "While I can think".count
         } else if remainingChars.hasPrefix("While I can talk") {
@@ -555,26 +567,38 @@ class Tokenizer {
         } else if remainingChars.hasPrefix("Come true") {
           self.next = Token(type: "END", value: "0")
           position += "Come true".count
-        } else if remainingChars.hasPrefix("It's Now or Never") {
-          self.next = Token(type: "OR", value: "0")
-          position += "It's Now or Never".count
         } else if remainingChars.hasPrefix("To say the words he truly feels:") {
           self.next = Token(type: "PRINT", value: "0")
           position += "To say the words he truly feels:".count
+        } else if remainingChars.hasPrefix("It's Now or Never") {
+          self.next = Token(type: "OR", value: "0")
+          position += "It's Now or Never".count
         } else if remainingChars.hasPrefix("Oh, there's black Jack and poker") {
           self.next = Token(type: "AND", value: "0")
           position += "Oh, there's black Jack and poker".count
+        } else if remainingChars.hasPrefix("equal to") {
+          self.next = Token(type: "EQ", value: "0")
+          position += "equal to".count
+        } else if remainingChars.hasPrefix("more than") {
+          self.next = Token(type: "GT", value: "0")
+          position += "more than".count
+        } else if remainingChars.hasPrefix("less than") {
+          self.next = Token(type: "LT", value: "0")
+          position += "less than".count
         } else if remainingChars.hasPrefix("Love me tender") {
-          self.next = Token(type: "MUL", value: "0")
+          self.next = Token(type: "PLUS", value: "0")
           position += "Love me tender".count
         } else if remainingChars.hasPrefix("So don't you mess around with me") {
-          self.next = Token(type: "DIV", value: "0")
+          self.next = Token(type: "MINUS", value: "0")
           position += "So don't you mess around with me".count
+        } else if remainingChars.hasPrefix("Follow That Dream") {
+          self.next = Token(type: "CONCAT", value: "0")
+          position += "Follow That Dream".count
         } else if remainingChars.hasPrefix("You were always on my mind") {
-          self.next = Token(type: "PLUS", value: "0")
+          self.next = Token(type: "MUL", value: "0")
           position += "You were always on my mind".count
         } else if remainingChars.hasPrefix("They're so lonely") {
-          self.next = Token(type: "MINUS", value: "0")
+          self.next = Token(type: "DIV", value: "0")
           position += "They're so lonely".count
         } else if remainingChars.hasPrefix("Can't Help Falling in Love") {
           self.next = Token(type: "PLUS", value: "0")
@@ -588,15 +612,6 @@ class Tokenizer {
         } else if remainingChars.hasPrefix("When you don't believe a word I say:") {
           self.next = Token(type: "READ", value: "0")
           position += "When you don't believe a word I say:".count
-        } else if remainingChars.hasPrefix("equal to") {
-          self.next = Token(type: "EQ", value: "0")
-          position += "equal to".count
-        } else if remainingChars.hasPrefix("more than") {
-          self.next = Token(type: "GT", value: "0")
-          position += "more than".count
-        } else if remainingChars.hasPrefix("less than") {
-          self.next = Token(type: "LT", value: "0")
-          position += "less than".count
         } else if remainingChars.hasPrefix("is") {
           self.next = Token(type: "ASSIGN", value: "0")
           position += "is".count

@@ -47,7 +47,7 @@ STATEMENT = (
     | "To say the words he truly feels:", BOOL_EXP 
     | "While I can think", "\n", BOOL_EXP, "\n", "While I can talk", "\n", {STATEMENT}, "While I can stand" 
     | "If I can dream","\n", BOOL_EXP, "\n", "So please let my dream", "\n", {STATEMENT}, (|"But I can't help", "\n", {STATEMENT}), "Come true" 
-    | "Function", IDENTIFIER, "(", ( | IDENTIFIER, { ( "," ), IDENTIFIER } ), ")", "\n", { ( STATEMENT ) }, "We can't go on together" 
+    | "Blue Hawaii", IDENTIFIER, "(", ( | IDENTIFIER, { ( "," ), IDENTIFIER } ), ")", "\n", { ( STATEMENT ) }, "We can't go on together" 
     | "Return to sender", BOOL_EXP 
     ), "\n" ;
 
