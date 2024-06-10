@@ -41,82 +41,80 @@
    enum yytokentype {
      NUMBER = 258,
      IDENTIFIER = 259,
-     DECLARATOR = 260,
-     PRINT = 261,
-     WHILE_CONDITION = 262,
-     WHILE_STATEMENTS = 263,
-     WHILE_END = 264,
-     IF_CONDITION = 265,
-     IF_STATEMENTS = 266,
-     ELSE = 267,
-     IF_END = 268,
-     OR_INIT = 269,
-     OR = 270,
-     OR_END = 271,
-     AND_INIT = 272,
-     AND = 273,
-     AND_END = 274,
-     COMP_INIT = 275,
-     COMP_EQUAL = 276,
-     COMP_MORE = 277,
-     COMP_LESS = 278,
-     COMP_END = 279,
-     SUM = 280,
-     SUBTRACT = 281,
-     MULTIPLY = 282,
-     DIVIDE = 283,
-     PLUS = 284,
-     MINUS = 285,
-     NOT = 286,
-     INPUT = 287,
-     NEWLINE = 288
+     STRING = 260,
+     EOL = 261,
+     COMMA = 262,
+     RPAREN = 263,
+     LPAREN = 264,
+     LOCAL = 265,
+     FUNCTION = 266,
+     END = 267,
+     RETURN = 268,
+     WHILE = 269,
+     DO = 270,
+     IF = 271,
+     THEN = 272,
+     ELSE = 273,
+     PRINT = 274,
+     OR = 275,
+     AND = 276,
+     EQ = 277,
+     GT = 278,
+     LT = 279,
+     PLUS = 280,
+     MINUS = 281,
+     CONCAT = 282,
+     MUL = 283,
+     DIV = 284,
+     NOT = 285,
+     READ = 286,
+     ASSIGN = 287
    };
 #endif
 /* Tokens.  */
 #define NUMBER 258
 #define IDENTIFIER 259
-#define DECLARATOR 260
-#define PRINT 261
-#define WHILE_CONDITION 262
-#define WHILE_STATEMENTS 263
-#define WHILE_END 264
-#define IF_CONDITION 265
-#define IF_STATEMENTS 266
-#define ELSE 267
-#define IF_END 268
-#define OR_INIT 269
-#define OR 270
-#define OR_END 271
-#define AND_INIT 272
-#define AND 273
-#define AND_END 274
-#define COMP_INIT 275
-#define COMP_EQUAL 276
-#define COMP_MORE 277
-#define COMP_LESS 278
-#define COMP_END 279
-#define SUM 280
-#define SUBTRACT 281
-#define MULTIPLY 282
-#define DIVIDE 283
-#define PLUS 284
-#define MINUS 285
-#define NOT 286
-#define INPUT 287
-#define NEWLINE 288
+#define STRING 260
+#define EOL 261
+#define COMMA 262
+#define RPAREN 263
+#define LPAREN 264
+#define LOCAL 265
+#define FUNCTION 266
+#define END 267
+#define RETURN 268
+#define WHILE 269
+#define DO 270
+#define IF 271
+#define THEN 272
+#define ELSE 273
+#define PRINT 274
+#define OR 275
+#define AND 276
+#define EQ 277
+#define GT 278
+#define LT 279
+#define PLUS 280
+#define MINUS 281
+#define CONCAT 282
+#define MUL 283
+#define DIV 284
+#define NOT 285
+#define READ 286
+#define ASSIGN 287
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 11 "bison.y"
+#line 11 "rockabilly.y"
 {
-    int int_val;
-    char *str_val;
+    int ival;
+    char *sval;
 }
 /* Line 1529 of yacc.c.  */
-#line 120 "bison.tab.h"
+#line 118 "rockabilly.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

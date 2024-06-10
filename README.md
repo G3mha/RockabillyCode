@@ -7,13 +7,16 @@ Author: Enricco Gemha
 You can verify the lexical and sintatic adherence, with Flex and Bison, respectively.
 
 ```bash
-
+flex rockabilly.l; bison -d rockabilly.y
+gcc lex.yy.c rockabilly.tab.c -o rockabilly
+./rockabilly < ../test.ep
 ```
 
 In order to compile and run the code, you can use the compiler written in Swift, with the following command.
 
 ```bash
-swift main.swift <filename>.ep
+cd src/compiler
+swift rockabilly.swift ../test.ep
 ```
 
 ## Description

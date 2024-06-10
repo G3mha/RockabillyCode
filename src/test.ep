@@ -1,20 +1,17 @@
--- Test for variable declaration and assignment
+
 Memphis varOne is three
 Memphis varTwo is six
 To say the words he truly feels: varOne
 To say the words he truly feels: varTwo
 
--- Test for arithmetic operations
 varThree is varOne Love me tender varTwo
 varFour is varThree They're so lonely two
 varFive is varThree So don't you mess around with me varTwo
 
--- Test for string concatenation
 Memphis strOne is "Hello"
 Memphis strTwo is "World"
 strThree is strOne Follow That Dream strTwo
 
--- Test for function declaration and call
 Blue Hawaii add (a, b)
   Return to sender a Love me tender b
 We can't go on together
@@ -22,7 +19,6 @@ We can't go on together
 varSix is add(varOne, varTwo)
 varSeven is add(varSix, two)
 
--- Test for while loop
 Memphis counter is zero
 While I can think counter less than five
 While I can talk
@@ -30,7 +26,6 @@ While I can talk
   To say the words he truly feels: counter
 While I can stand
 
--- Test for if statement
 Memphis condition is three more than two
 If I can dream condition
 So please let my dream
@@ -39,7 +34,6 @@ But I can't help
   To say the words he truly feels: "Condition is false"
 Come true
 
--- Test for input and output
 Memphis inputVar
 To say the words he truly feels: "Enter a number:"
 inputVar is When you don't believe a word I say:
