@@ -668,18 +668,9 @@ class Parser {
       return result
     } else if tokenizer.next.type == "READ" {
       tokenizer.selectNext()
-      if tokenizer.next.type != "LPAREN" {
-        writeStderrAndExit("Missing opening parenthesis for read statement")
-      }
-      tokenizer.selectNext()
-      if tokenizer.next.type != "RPAREN" {
-        writeStderrAndExit("Missing closing parenthesis for read statement")
-      }
-      tokenizer.selectNext()
       return ReadOp(value: "READ", children: [])
-    } else {
-      writeStderrAndExit("Invalid factor: (\(tokenizer.next.type), \(tokenizer.next.value))")
     }
+    writeStderrAndExit("Invalid factor: (\(tokenizer.next.type), \(tokenizer.next.value))")
     return NoOp(value: "", children: [])
   }
 
