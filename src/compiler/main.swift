@@ -443,136 +443,174 @@ class Tokenizer {
   }
 
   func selectNext() {
-    while position < source.count && source[source.index(source.startIndex, offsetBy: position)].isWhitespace {
+    while position < source.count && source[source.index(source.startIndex, offsetBy: position)] == " " {
       position += 1
     }
-    guard position < source.count else {
+    if position >= source.count {
       self.next = Token(type: "EOF", value: "0")
       return
     }
 
     let currentChar = source[source.index(source.startIndex, offsetBy: position)]
 
-    if currentChar.isLetter {
-      var word = ""
-      while position < source.count && source[source.index(source.startIndex, offsetBy: position)].isLetter {
-        word.append(source[source.index(source.startIndex, offsetBy: position)])
+    if currentChar == "\n" {
+      self.next = Token(type: "EOL", value: "0")
+      position += 1
+      return
+    } else if currentChar == "," {
+      self.next = Token(type: "COMMA", value: "0")
+      position += 1
+      return
+    } else if currentChar == "\"" {
+      position += 1
+      var string = ""
+      while source[source.index(source.startIndex, offsetBy: position)] != "\"" {
+        string.append(source[source.index(source.startIndex, offsetBy: position)])
         position += 1
       }
-      switch word {
-      case "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "zero":
-        // Read the number
-        var number = ""
-        var currentWord = word
-        while wordToDigit.keys.contains(currentWord) {
-          number.append(wordToDigit[currentWord]!)
-          currentWord = ""
-          // Skip whitespace
-          while position < source.count && source[source.index(source.startIndex, offsetBy: position)].isWhitespace {
-            position += 1
-          }
-          // Read the next word
-          while position < source.count && source[source.index(source.startIndex, offsetBy: position)].isLetter {
-            currentWord.append(source[source.index(source.startIndex, offsetBy: position)])
-            position += 1
-          }
-        }
-        self.next = Token(type: "NUMBER", value: number)
-      case "equal":
-        self.next = Token(type: "REL_OP", value: "equal")
-      case "more":
-        self.next = Token(type: "REL_OP", value: "more")
-      case "less":
-        self.next = Token(type: "REL_OP", value: "less")
-      case "is":
-        self.next = Token(type: "IS", value: "is")
-      case "To":
-        // consume the rest of the expression: "To say the words he truly feels: "
-        while position < source.count && source[source.index(source.startIndex, offsetBy: position)] != ":" {
+      self.next = Token(type: "STRING", value: string)
+      position += 1
+      return
+    } else if currentChar == "(" {
+      self.next = Token(type: "LPAREN", value: "0")
+      position += 1
+      return
+    } else if currentChar == ")" {
+      self.next = Token(type: "RPAREN", value: "0")
+      position += 1
+      return
+    } else if currentChar.isLetter {
+      var remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+      var wordNumber = ""
+      while true {
+        if remainingChars.hasPrefix("one") {
+          wordNumber += "1"
+          position += "one".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("two") {
+          wordNumber += "2"
+          position += "two".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("three") {
+          wordNumber += "3"
+          position += "three".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("four") {
+          wordNumber += "4"
+          position += "four".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("five") {
+          wordNumber += "5"
+          position += "five".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("six") {
+          wordNumber += "6"
+          position += "six".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("seven") {
+          wordNumber += "7"
+          position += "seven".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("eight") {
+          wordNumber += "8"
+          position += "eight".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("nine") {
+          wordNumber += "9"
+          position += "nine".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix("zero") {
+          wordNumber += "0"
+          position += "zero".count
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else if remainingChars.hasPrefix(" ") {
           position += 1
+          remainingChars = source[source.index(source.startIndex, offsetBy: position)...]
+        } else {
+          break
         }
-        self.next = Token(type: "PRINT", value: "0")
-      case "While":
-        self.next = Token(type: "WHILE", value: "While")
-      case "If":
-        self.next = Token(type: "IF", value: "If")
-      case "But":
-        self.next = Token(type: "ELSE", value: "But")
-        return
-      default:
-        self.next = Token(type: "IDENTIFIER", value: word)
       }
-    position += 1
-    } else {
-      let remainingChars = source.suffix(from: source.index(source.startIndex, offsetBy: position))
-
-      if remainingChars.hasPrefix("It's Now or Never") {
-        self.next = Token(type: "OR", value: "0")
-        position += "It's Now or Never".count
-        return
-      } else if remainingChars.hasPrefix("Oh, there's black Jack and poker") {
-        self.next = Token(type: "AND", value: "0")
-        position += "Oh, there's black Jack and poker".count
-        return
-      } else if remainingChars.hasPrefix("Love me tender") {
-        self.next = Token(type: "MUL", value: "0")
-        position += "Love me tender".count
-        return
-      } else if remainingChars.hasPrefix("So don't you mess around with me") {
-        self.next = Token(type: "DIV", value: "0")
-        position += "So don't you mess around with me".count
-        return
-      } else if remainingChars.hasPrefix("You were always on my mind") {
-        self.next = Token(type: "PLUS", value: "0")
-        position += "You were always on my mind".count
-        return
-      } else if remainingChars.hasPrefix("They're so lonely") {
-        self.next = Token(type: "MINUS", value: "0")
-        position += "They're so lonely".count
-        return
-      } else if remainingChars.hasPrefix("Can't Help Falling in Love") {
-        self.next = Token(type: "PLUS", value: "0")
-        position += "Can't Help Falling in Love".count
-        return
-      } else if remainingChars.hasPrefix("I'm evil") {
-        self.next = Token(type: "MINUS", value: "0")
-        position += "I'm evil".count
-        return
-      } else if remainingChars.hasPrefix("You're the devil in disguise") {
-        self.next = Token(type: "NOT", value: "0")
-        position += "You're the devil in disguise".count
-        return
-      } else if remainingChars.hasPrefix("When you don't believe a word I say:") {
-        self.next = Token(type: "READ", value: "0")
-        position += "When you don't believe a word I say:".count
+      if wordNumber != "" {
+        self.next = Token(type: "NUMBER", value: wordNumber)
         return
       } else {
-        switch currentChar {
-        case "(":
-          self.next = Token(type: "LPAREN", value: String(currentChar))
-        case ")":
-          self.next = Token(type: "RPAREN", value: String(currentChar))
-        case "{":
-          self.next = Token(type: "LBRACE", value: String(currentChar))
-        case "}":
-          self.next = Token(type: "RBRACE", value: String(currentChar))
-        case ",":
-          self.next = Token(type: "COMMA", value: String(currentChar))
-        case "\n":
-          self.next = Token(type: "EOL", value: String(currentChar))
-        case "\"":
-          position += 1
-          var string = ""
-          while source[source.index(source.startIndex, offsetBy: position)] != "\"" {
-            string.append(source[source.index(source.startIndex, offsetBy: position)])
+        if remainingChars.hasPrefix("While I can think") {
+          self.next = Token(type: "WHILE", value: "0")
+          position += "While I can think".count
+        } else if remainingChars.hasPrefix("While I can talk") {
+          self.next = Token(type: "DO", value: "0")
+          position += "While I can talk".count
+        } else if remainingChars.hasPrefix("While I can stand") {
+          self.next = Token(type: "END", value: "0")
+          position += "While I can stand".count
+        } else if remainingChars.hasPrefix("If I can dream") {
+          self.next = Token(type: "IF", value: "0")
+          position += "If I can dream".count
+        } else if remainingChars.hasPrefix("So please let my dream") {
+          self.next = Token(type: "THEN", value: "0")
+          position += "So please let my dream".count
+        } else if remainingChars.hasPrefix("But I can't help") {
+          self.next = Token(type: "ELSE", value: "0")
+          position += "But I can't help".count
+        } else if remainingChars.hasPrefix("Come true") {
+          self.next = Token(type: "END", value: "0")
+          position += "Come true".count
+        } else if remainingChars.hasPrefix("It's Now or Never") {
+          self.next = Token(type: "OR", value: "0")
+          position += "It's Now or Never".count
+        } else if remainingChars.hasPrefix("To say the words he truly feels:") {
+          self.next = Token(type: "PRINT", value: "0")
+          position += "To say the words he truly feels:".count
+        } else if remainingChars.hasPrefix("Oh, there's black Jack and poker") {
+          self.next = Token(type: "AND", value: "0")
+          position += "Oh, there's black Jack and poker".count
+        } else if remainingChars.hasPrefix("Love me tender") {
+          self.next = Token(type: "MUL", value: "0")
+          position += "Love me tender".count
+        } else if remainingChars.hasPrefix("So don't you mess around with me") {
+          self.next = Token(type: "DIV", value: "0")
+          position += "So don't you mess around with me".count
+        } else if remainingChars.hasPrefix("You were always on my mind") {
+          self.next = Token(type: "PLUS", value: "0")
+          position += "You were always on my mind".count
+        } else if remainingChars.hasPrefix("They're so lonely") {
+          self.next = Token(type: "MINUS", value: "0")
+          position += "They're so lonely".count
+        } else if remainingChars.hasPrefix("Can't Help Falling in Love") {
+          self.next = Token(type: "PLUS", value: "0")
+          position += "Can't Help Falling in Love".count
+        } else if remainingChars.hasPrefix("I'm evil") {
+          self.next = Token(type: "MINUS", value: "0")
+          position += "I'm evil".count
+        } else if remainingChars.hasPrefix("You're the devil in disguise") {
+          self.next = Token(type: "NOT", value: "0")
+          position += "You're the devil in disguise".count
+        } else if remainingChars.hasPrefix("When you don't believe a word I say:") {
+          self.next = Token(type: "READ", value: "0")
+          position += "When you don't believe a word I say:".count
+        } else if remainingChars.hasPrefix("equal to") {
+          self.next = Token(type: "EQ", value: "0")
+          position += "equal to".count
+        } else if remainingChars.hasPrefix("more than") {
+          self.next = Token(type: "GT", value: "0")
+          position += "more than".count
+        } else if remainingChars.hasPrefix("less than") {
+          self.next = Token(type: "LT", value: "0")
+          position += "less than".count
+        } else if remainingChars.hasPrefix("is") {
+          self.next = Token(type: "ASSIGN", value: "0")
+          position += "is".count
+        } else {
+          var identifier = ""
+          while source[source.index(source.startIndex, offsetBy: position)].isLetter {
+            identifier.append(source[source.index(source.startIndex, offsetBy: position)])
             position += 1
           }
-          self.next = Token(type: "STRING", value: string)
-        default:
-          writeStderrAndExit("Unexpected character: \(currentChar)")
+          self.next = Token(type: "IDENTIFIER", value: identifier)
         }
-        position += 1
       }
+    } else {
+      writeStderrAndExit("Unexpected character: \(currentChar)")
     }
   }
 }
@@ -718,7 +756,7 @@ class Parser {
         tokenizer.selectNext()
         return FuncCall(value: name, children: arguments)
       } else {
-        writeStderrAndExit("Invalid statement")
+        writeStderrAndExit("Invalid assignment or function call")
       }
     } else if tokenizer.next.type == "PRINT" {
       tokenizer.selectNext()
@@ -751,7 +789,11 @@ class Parser {
       if tokenizer.next.type != "THEN" {
         writeStderrAndExit("Missing THEN after IF condition")
       }
+      // print(tokenizer.next.type)
+      // print(tokenizer.next.value)
       tokenizer.selectNext()
+      // print(tokenizer.next.type)
+      // print(tokenizer.next.value)
       if tokenizer.next.type != "EOL" {
         writeStderrAndExit("Missing EOL after THEN")
       }

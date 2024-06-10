@@ -41,27 +41,32 @@ The only characters allowed are from a to Z, as capital sensitive.
 ```EBNF
 BLOCK = { STATEMENT };
 
-STATEMENT = ( | DECLARATION | PRINT | WHILE | IF ), "\n";
-
-DECLARATION = IDENTIFIER, "is", BOOL_EXP;
-
-PRINT = "To say the words he truly feels:", BOOL_EXP;
-
-WHILE = "While I can think", "\n", BOOL_EXP, "\n", "While I can talk", "\n", {STATEMENT}, "While I can stand";
-
-IF = "If I can dream","\n", BOOL_EXP, "\n", "So please let my dream", "\n", {STATEMENT}, (|"But", "\n", {STATEMENT}), "Come true";
+STATEMENT = ( 
+    IDENTIFIER, ( "is", BOOL_EXP | "(" , ( | BOOL_EXP, { ( "," ) , BOOL_EXP } ), ")" )
+    | "Memphis", IDENTIFIER, ["is", BOOL_EXP] 
+    | "To say the words he truly feels:", BOOL_EXP 
+    | "While I can think", "\n", BOOL_EXP, "\n", "While I can talk", "\n", {STATEMENT}, "While I can stand" 
+    | "If I can dream","\n", BOOL_EXP, "\n", "So please let my dream", "\n", {STATEMENT}, (|"But I can't help", "\n", {STATEMENT}), "Come true" 
+    | "Function", IDENTIFIER, "(", ( | IDENTIFIER, { ( "," ), IDENTIFIER } ), ")", "\n", { ( STATEMENT ) }, "We can't go on together" 
+    | "Return to sender", BOOL_EXP 
+    ), "\n" ;
 
 BOOL_EXP = BOOL_TERM, { ("It's Now or Never"), BOOL_TERM };
 
 BOOL_TERM = REL_EXP, { ("Oh, there's black Jack and poker"), REL_EXP };
 
-REL_EXP = EXPRESSION, { "Treat me like", ("equal" | "more" | "less"), EXPRESSION };
+REL_EXP = EXPRESSION, { ("equal to" | "more than" | "less than"), EXPRESSION };
 
-EXPRESSION = TERM, { ("Love me tender" | "So don't you mess around with me"), TERM } ;
+EXPRESSION = TERM, { ("Love me tender" | "So don't you mess around with me" | "Follow That Dream"), TERM } ;
 
 TERM = FACTOR, { ("You were always on my mind" | "They're so lonely"), FACTOR } ;
 
-FACTOR = NUMBER | IDENTIFIER | (("Can't Help Falling in Love" | "I'm evil" | "You're the devil in disguise"), FACTOR ) | "When you don't believe a word I say:" ;
+FACTOR = NUMBER 
+    | STRING 
+    | IDENTIFIER, ( | "(" , ( | BOOL_EXP, { ( "," ) , BOOL_EXP } ), ")" ) 
+    | ("Can't Help Falling in Love" | "I'm evil" | "You're the devil in disguise"), FACTOR 
+    | "(", BOOL_EXP, ")" 
+    | "When you don't believe a word I say:" ;
 
 IDENTIFIER = LETTER, { LETTER };
 
@@ -70,6 +75,8 @@ NUMBER = DIGIT, { DIGIT } ;
 LETTER = ( "a" | "..." | "z" | "A" | "..." | "Z" ) ;
 
 DIGIT = ( "one" | "two" | "three" | "four" | "five" | "six" | "seven" | "eight" | "nine" | "zero" ) ;
+
+STRING = '"', ({LETTER}), '"';
 ```
 
 ## Railroad Diagram
