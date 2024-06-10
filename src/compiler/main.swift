@@ -792,11 +792,7 @@ class Parser {
       if tokenizer.next.type != "THEN" {
         writeStderrAndExit("Missing THEN after IF condition")
       }
-      // print(tokenizer.next.type)
-      // print(tokenizer.next.value)
       tokenizer.selectNext()
-      // print(tokenizer.next.type)
-      // print(tokenizer.next.value)
       if tokenizer.next.type != "EOL" {
         writeStderrAndExit("Missing EOL after THEN")
       }
