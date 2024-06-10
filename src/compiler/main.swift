@@ -759,6 +759,10 @@ class Parser {
     } else if tokenizer.next.type == "WHILE" {
       tokenizer.selectNext()
       let condition = parseBoolExpression(symbolTable: symbolTable, funcTable: funcTable)
+      if tokenizer.next.type != "EOL" {
+        writeStderrAndExit("Missing EOL after WHILE condition")
+      }
+      tokenizer.selectNext()
       if tokenizer.next.type != "DO" {
         writeStderrAndExit("Missing DO after WHILE condition")
       }
@@ -780,6 +784,10 @@ class Parser {
     } else if tokenizer.next.type == "IF" {
       tokenizer.selectNext()
       let condition = parseBoolExpression(symbolTable: symbolTable, funcTable: funcTable)
+      if tokenizer.next.type != "EOL" {
+        writeStderrAndExit("Missing EOL after IF condition")
+      }
+      tokenizer.selectNext()
       if tokenizer.next.type != "THEN" {
         writeStderrAndExit("Missing THEN after IF condition")
       }
