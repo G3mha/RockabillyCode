@@ -41,8 +41,8 @@ int words_to_number(const char *words) {
 [ \t]+ ;  // Ignore whitespaces
 "\n" { printf("Token: EOL\n"); return EOL; }
 "," { printf("Token: COMMA\n"); return COMMA; }
-"(" { printf("Token: RPAREN\n"); return RPAREN; }
-")" { printf("Token: LPAREN\n"); return LPAREN; }
+"(" { printf("Token: LPAREN\n"); return LPAREN; }
+")" { printf("Token: RPAREN\n"); return RPAREN; }
 \"([^\"]*)\" {
   // Remove the quotes from the string and store in yylval
   yylval.sval = strdup(yytext + 1);
@@ -86,7 +86,7 @@ int words_to_number(const char *words) {
 "When you don't believe a word I say:" { printf("Token: READ\n"); return READ; }
 "is" { printf("Token: ASSIGN\n"); return ASSIGN; }
 
-[a-zA-Z:,' ]+ {
+[a-zA-Z]+ {
   // if none of the reserved words are found, it is an identifier
   yylval.sval = strdup(yytext);
   printf("Token: IDENTIFIER, Value: %s\n", yylval.sval);
